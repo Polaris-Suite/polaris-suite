@@ -3,6 +3,7 @@ import { checkEqual } from "../../helpers";
 /**
  * 
  * @param fn function to be tested
+ * @param params parameters to be passed to the function
  * @returns result object
  */
 export const call = (fn: Function, params?: Array<any>): CallResult => {

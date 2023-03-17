@@ -3,10 +3,9 @@ import { checkEqual } from "../../helpers";
 /**
  * 
  * @param actual actual value to be tested
- * @param params array of parameters to be passed to the function
  * @returns expectation object
  */
-export const expect = (actual: any, params?: Array<any>): ExpectationResult => {
+export const expect = (actual: any): ExpectationResult => {
     let expectation = {
         equalsTo: (expected: any) => {
             console.log(`Test ${checkEqual(actual, expected) ? 'passed' : 'failed'}`);
