@@ -1,4 +1,6 @@
-import { checkEqual } from "../../helpers";
+import { checkEqual } from "../../helpers/index.js";
+import { bgColor } from "../../helpers/cli/chalk-cli.js";
+import { CustomError, expectMessage } from "../../helpers/error/index.js";
 
 /**
  * 
@@ -8,94 +10,102 @@ import { checkEqual } from "../../helpers";
 export const expect = (actual: any): ExpectationResult => {
     let expectation = {
         equalsTo: (expected: any) => {
-            console.log(`Test ${checkEqual(actual, expected) ? 'passed' : 'failed'}`);
+            if(checkEqual(actual, expected)){
+                console.log(bgColor('Test Passed').success());
+            }else {
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage(expected.toString(), actual)}`);
+            }
         },
         toBeNull: () => {
             if(actual === null){
-                console.log('Test Passed');
+                console.log(bgColor('Test Passed').success());
             }else {
-                console.log(`Test Failed: Expected null but got ${typeof actual}`)
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('null', typeof actual)}`);
             }
         },
         toBeString: () => {
             if(typeof actual === 'string'){
                 console.log('Test Passed');
             }else {
-                console.log(`Test Failed: Expected string but got ${typeof actual}`)
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('string', typeof actual)}`);
             }
         },
         toBeNumber: () => {
             if(typeof actual === 'number'){
                 console.log('Test Passed');
             }else {
-                console.log(`Test Failed: Expected number but got ${typeof actual}`)
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('number', typeof actual)}`);
             }
         },
         toBeBoolean: () => {
             if(typeof actual === 'boolean'){
                 console.log('Test Passed');
             }else {
-                console.log(`Test Failed: Expected boolean but got ${typeof actual}`)
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('boolean', typeof actual)}`);
             }
         },
         toBeArray: () => {
             if(actual.length > 0 && typeof actual === 'object'){
                 console.log('Test Passed');
             }else {
-                console.log(`Test Failed: Expected array but got ${typeof actual}`)
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('array', typeof actual)}`);
             }
         },
         toBeObject: () => {
             if(typeof actual === 'object'){
                 console.log('Test Passed');
             }else {
-                console.log(`Test Failed: Expected object but got ${typeof actual}`)
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('object', typeof actual)}`);
             }
         },
         not: {
             equalsTo: (expected: any) => {
-                console.log(`Test ${!checkEqual(actual, expected) ? 'passed' : 'failed'}`);
+                if(!checkEqual(actual, expected)){
+                    console.log(bgColor('Test Passed').success());
+                }else {
+                    throw new CustomError(bgColor('Test Failed').error(), `${expectMessage(`not ${expected.toString()}`, actual)}`);
+                }
             },
             toBeNull: () => {
                 if(actual != null){
                     console.log('Test Passed');
                 }else {
-                    console.log(`Test Failed: Expected not null but got ${typeof actual}`)
+                    throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('not be null', typeof actual)}`);
                 }
             },
             toBeString: () => {
                 if(typeof actual != 'string'){
                 console.log('Test Passed');
             }else {
-                console.log(`Test Failed: Expected not string but got ${typeof actual}`)
+                throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('not be string', typeof actual)}`);
             }
             },
             toBeNumber: () => {
                 if(typeof actual != 'number'){
                     console.log('Test Passed');
                 }else {
-                    console.log(`Test Failed: Expected not number but got ${typeof actual}`)
+                    throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('not be number', typeof actual)}`);
                 }
             },
             toBeBoolean: () => {
                 if(typeof actual != 'boolean'){
                     console.log('Test Passed');
                 }else {
-                    console.log(`Test Failed: Expected not boolean but got ${typeof actual}`)
+                    throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('not be boolean', typeof actual)}`);
                 }
             },
             toBeArray: () => {
                 if(actual.length <= 0 && typeof actual != 'object'){
                     console.log('Test Passed');
                 }else {
-                    console.log(`Test Failed: Expected not array but got ${typeof actual}`)
+                    throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('not be array', typeof actual)}`);
                 }
             },
             toBeObject: () => {
                 if(typeof actual != 'object'){
                     console.log('Test Passed');
                 }else {
-                    console.log(`Test Failed: Expected not object but got ${typeof actual}`)
+                    throw new CustomError(bgColor('Test Failed').error(), `${expectMessage('not be object', typeof actual)}`);
                 }
             },
         },
