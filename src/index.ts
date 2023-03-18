@@ -4,10 +4,9 @@
  * @param name name of the suite
  * @param fn function to be executed
  */
-export const suite = (name: string, fn: Function) => {
-    console.log('Testing suite: ' + name);
-    fn();
-}
+// export const suite = (name: string, fn: Function) => {
+//     fn();
+// }
 
 /**
  * 
@@ -15,6 +14,5 @@ export const suite = (name: string, fn: Function) => {
  * @param fn function to be executed
  */
 export const test = (name: string, fn: Function) => {
-    console.log('Testing: ' + name);
     fn();
 }
