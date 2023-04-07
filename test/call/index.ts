@@ -1,6 +1,6 @@
 // test call function here
 
-import { call } from "../../src/packages/call/index.js";
+import { call } from "../../src/index.js";
 
 const add = (a: number, b: number) => a + b;
 

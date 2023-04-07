@@ -1,4 +1,4 @@
-import { component } from "../../src/packages/component/index.js";
+import { component } from "../../src/index.js";
 
 const divElement = document.createElement("div");
 divElement.style.color = "blue";
