@@ -1,5 +1,4 @@
-import { test } from "../../src/index.js";
-import { expect } from "../../src/packages/expect/index.js";
+import { test, expect } from '../../src/index.js';
 
 const num = 12;
 
