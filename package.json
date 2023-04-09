@@ -2,9 +2,20 @@
   "name": "polaris-suite",
   "version": "1.0.1",
   "description": "<h1 style=\"text-align: center;\">Polaris Testing Suite</h1>",
-  "main": "index.js",
-  "types": "./types/index.d.ts",
+  "main": "build/src/index.js",
+  "types": "types/index.d.ts",
   "type": "module",
+  "files": [
+    "build/src",
+    "types"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./build/src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "test": "tsc && node build/__tests__/index.js",
     "dev": "tsc && node build/src/index.js"
