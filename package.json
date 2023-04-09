@@ -1,6 +1,6 @@
 {
   "name": "polaris-suite",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "<h1 style=\"text-align: center;\">Polaris Testing Suite</h1>",
   "main": "index.js",
   "type": "module",
