@@ -12,6 +12,6 @@
     "skipLibCheck": true,
     "declaration": true
   },
-  "include": ["types/**/*.d.ts", "src"],
+  "include": ["types/**/*.d.ts", "src", "__tests__"],
   "exclude": ["node_modules", "build"],
 }

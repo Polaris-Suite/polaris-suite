@@ -1,7 +1,7 @@
 {
   "name": "polaris-suite",
   "version": "1.0.4",
-  "description": "<h1 style=\"text-align: center;\">Polaris Testing Suite</h1>",
+  "description": "easy to use, lite weight and collaborative automated testing suite for web applications",
   "main": "index.js",
   "type": "module",
   "types": "build/src/index.d.ts",
