@@ -21,7 +21,7 @@
     "dev": "tsc && node build/src/index.js"
   },
   "bin": {
-    "polaris": "node build/bin/test.js"
+    "polaris": "build/bin/test.js"
   },
   "repository": {
     "type": "git",

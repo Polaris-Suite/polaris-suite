@@ -1,9 +1,12 @@
 #!/usr/bin/env node
+import path from "path";
 import shell from "shelljs";
 
 export const run = () => {
-
-    shell.exec(`node ${process.argv[1]}`);
+    const folders = process.argv[2].split("/");
+    const location = [process.cwd(), ...folders].join(path.sep);
+    
+    shell.exec(`node ${location}`);
 }
 
 run();
