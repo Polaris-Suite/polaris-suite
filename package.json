@@ -4,7 +4,7 @@
   "description": "easy to use, lite weight and collaborative automated testing suite for web applications",
   "main": "index.js",
   "type": "module",
-  "types": "build/src/index.d.ts",
+  "types": "types/index.d.ts",
   "files": [
     "build/src",
     "build/bin",
