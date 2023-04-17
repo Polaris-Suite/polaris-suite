@@ -12,9 +12,11 @@
   ],
   "exports": {
     ".": {
-      "import": "./build/src/index.js",
-      "require": "./index.js"
-    }
+      "default": "./build/src/index.js",
+      "types": "./build/src/index.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./bin": "./build/bin/test.js"
   },
   "scripts": {
     "test": "tsc && node build/__tests__/index.js",
