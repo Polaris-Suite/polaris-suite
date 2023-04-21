@@ -27,19 +27,15 @@ export const call = (fn: Function, params?: Array<any>): CallResult => {
         returns: (result: any) => {
             const res = fn(...params!);
 
-            if(checkEqual(res, result)) console.log('Test passed');
-            else {
+            if(!checkEqual(res, result)) 
                 throw new CustomError(bgColor('Test Failed').error(), `${expectMessage(res.toString(), result)}`);
-            }
         },
         not: {
             returns: (result: any) => {
                 const res = fn(...params!);
 
-                if(!checkEqual(res, result)) console.log('Test passed');
-                else {
+                if(checkEqual(res, result)) 
                     throw new CustomError(bgColor('Test Failed').error(), `${expectMessage(`not to be ${res.toString()}`, result)}`);
-                }
             }
         }
     }
