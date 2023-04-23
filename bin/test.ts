@@ -2,6 +2,7 @@
 import { SpawnOptions } from "child_process";
 import { joinPathSep } from "./helper.js";
 import { spawn } from "child_process";
+import chalk from "chalk";
 
 export const run = () => {
     // correcting the separator for the path given by the users
@@ -20,7 +21,7 @@ export const run = () => {
     const childProcess = spawn(command, args, options);
 
     childProcess.stdout?.on("data", (data) => {
-        console.log(data.toString());
+        console.log(chalk(data.toString()));
     });
 
     childProcess.on('error', (err) => {
