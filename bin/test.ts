@@ -27,6 +27,10 @@ export const run = () => {
         console.error(`Error starting child process: ${err}`);
     });
 
+    childProcess.stderr?.on("data", (data) => {
+        console.error(data.toString());
+    });
+
     childProcess.on("close", (code) => {
         console.log(`child process exited with code ${code}`);
     })

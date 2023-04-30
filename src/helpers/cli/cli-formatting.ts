@@ -24,6 +24,9 @@ export const coloredText = (text: string) => {
         warning: () => {
             return `\x1b[33m${text}\x1b[0m`;
         },
+        suppressed: () => {
+            return `\x1b[2m${text}\x1b[0m`;
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-import { coloredText, formattedText } from "../helpers/cli/cli-formatting.js";
+import { bgColor, coloredText, formattedText } from "../helpers/cli/cli-formatting.js";
 
 // total number of tests (global variable)
 let numberOfTests: number = 0;
@@ -20,15 +20,16 @@ export const test = (name: string, fn: Function) => {
   // try to execute the function
   try {
     fn();
+
+    console.log(`${bgColor("PASS").success()} ${coloredText(`✓ (${name})`).success()}`)
   } catch (error) {
     // incrementing the number of failed test
     numberOfFailedTests++;
 
     // catching the error and printing it
-    console.log(
-      coloredText(`Test Failed ${formattedText(`(${name})`).bold()}`).error()
-    );
-    console.log(error);
+    console.error(coloredText(`Test Failed ${formattedText(`(${name})`).bold()}`).error());    
+    console.error(error);
+    console.log();
   }
 };
 
@@ -57,10 +58,9 @@ export const suite = (name: string, fn: Function) => {
  * logs the result summary after running the tests
  */
 export const result = () => {
-  console.log("\n");
   console.log(
     formattedText(
-      `Test Suites: ${
+      `\nTest Suites: ${
         numberOfFailedSuites > 0
           ? coloredText(`${numberOfFailedSuites} failed`).error() + ","
           : ""
