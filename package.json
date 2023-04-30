@@ -1,6 +1,6 @@
 {
   "name": "polaris-suite",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "easy to use, light weight and collaborative automated testing suite for web applications",
   "main": "index.js",
   "type": "module",
