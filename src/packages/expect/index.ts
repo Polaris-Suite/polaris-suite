@@ -12,7 +12,7 @@ export const expect = (actual: any): ExpectationResult => {
     equalsTo: (expected: any) => {
       if (!checkEqual(actual, expected)) {
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage(expected.toString(), actual)}`
         );
       }
@@ -20,7 +20,7 @@ export const expect = (actual: any): ExpectationResult => {
     toBeNull: () => {
       if (actual !== null) {
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage("null", typeof actual)}`
         );
       }
@@ -28,7 +28,7 @@ export const expect = (actual: any): ExpectationResult => {
     toBeString: () => {
       if (typeof actual !== "string") {
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage("string", typeof actual)}`
         );
       }
@@ -36,7 +36,7 @@ export const expect = (actual: any): ExpectationResult => {
     toBeNumber: () => {
       if (typeof actual !== "number") {
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage("number", typeof actual)}`
         );
       }
@@ -44,7 +44,7 @@ export const expect = (actual: any): ExpectationResult => {
     toBeBoolean: () => {
       if (typeof actual !== "boolean") {
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage("boolean", typeof actual)}`
         );
       }
@@ -54,7 +54,7 @@ export const expect = (actual: any): ExpectationResult => {
         console.log("Test Passed");
       } else {
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage("array", typeof actual)}`
         );
       }
@@ -62,7 +62,7 @@ export const expect = (actual: any): ExpectationResult => {
     toBeObject: () => {
       if (typeof actual !== "object") {
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage("object", typeof actual)}`
         );
       }
@@ -71,7 +71,7 @@ export const expect = (actual: any): ExpectationResult => {
       equalsTo: (expected: any) => {
         if (checkEqual(actual, expected)) {
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage(`not ${expected.toString()}`, actual)}`
           );
         }
@@ -79,7 +79,7 @@ export const expect = (actual: any): ExpectationResult => {
       toBeNull: () => {
         if (actual === null) {
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage("not be null", typeof actual)}`
           );
         }
@@ -87,7 +87,7 @@ export const expect = (actual: any): ExpectationResult => {
       toBeString: () => {
         if (typeof actual === "string") {
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage("not be string", typeof actual)}`
           );
         }
@@ -95,7 +95,7 @@ export const expect = (actual: any): ExpectationResult => {
       toBeNumber: () => {
         if (typeof actual === "number") {
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage("not be number", typeof actual)}`
           );
         }
@@ -103,7 +103,7 @@ export const expect = (actual: any): ExpectationResult => {
       toBeBoolean: () => {
         if (typeof actual === "boolean") {
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage("not be boolean", typeof actual)}`
           );
         }
@@ -113,7 +113,7 @@ export const expect = (actual: any): ExpectationResult => {
           console.log("Test Passed");
         } else {
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage("not be array", typeof actual)}`
           );
         }
@@ -121,7 +121,7 @@ export const expect = (actual: any): ExpectationResult => {
       toBeObject: () => {
         if (typeof actual === "object") {
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage("not be object", typeof actual)}`
           );
         }

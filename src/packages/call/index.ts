@@ -1,5 +1,5 @@
 import { bgColor } from "../../helpers/cli/cli-formatting.js";
-import { CustomError, expectMessage } from "../../helpers/error/index.js";
+import { CustomError, callMessage, expectMessage } from "../../helpers/error/index.js";
 import { checkEqual } from "../../helpers/index.js";
 
 /**
@@ -13,34 +13,15 @@ export const call = (fn: Function, params?: Array<any>): CallResult => {
     iterateWithData: (data: Datatable, options?: WithDataOptions) => {
       for (let i = 0; i < data.length; i++) {
         const { arg, result, isNotEqual } = data[i];
+        const isEqual = checkEqual(fn(...arg), result);
         if (options && options.async) {
           (async () => {
-            if (isNotEqual)
-              console.log(
-                `Itreation ${i + 1}: Test ${
-                  !checkEqual(await fn(...arg), result) ? "passed" : "failed"
-                }`
-              );
-            else
-              console.log(
-                `Itreation ${i + 1}: Test ${
-                  checkEqual(await fn(...arg), result) ? "passed" : "failed"
-                }`
-              );
+            if ((isNotEqual && !isEqual) || (!isNotEqual && !isEqual))
+              throw new CustomError(bgColor("Fail").error(), callMessage(result.toString(), fn(...arg).toString(), i + 1));
           })();
         } else {
-          if (isNotEqual)
-            console.log(
-              `Itreation ${i + 1}: Test ${
-                !checkEqual(fn(...arg), result) ? "passed" : "failed"
-              }`
-            );
-          else
-            console.log(
-              `Itreation ${i + 1}: Test ${
-                checkEqual(fn(...arg), result) ? "passed" : "failed"
-              }`
-            );
+          if ((isNotEqual && !isEqual) || (!isNotEqual && !isEqual))
+            throw new CustomError(bgColor("Fail").error(), callMessage(result.toString(), fn(...arg).toString(), i + 1));
         }
       }
     },
@@ -49,7 +30,7 @@ export const call = (fn: Function, params?: Array<any>): CallResult => {
 
       if (!checkEqual(res, result))
         throw new CustomError(
-          bgColor("Test Failed").error(),
+          bgColor("Fail").error(),
           `${expectMessage(res.toString(), result)}`
         );
     },
@@ -59,7 +40,7 @@ export const call = (fn: Function, params?: Array<any>): CallResult => {
 
         if (checkEqual(res, result))
           throw new CustomError(
-            bgColor("Test Failed").error(),
+            bgColor("Fail").error(),
             `${expectMessage(`not to be ${res.toString()}`, result)}`
           );
       },

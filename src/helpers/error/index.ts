@@ -16,3 +16,13 @@ export const expectMessage = (expected: string, found: string) => {
     ).warning()}`
   ).error();
 };
+
+export const callMessage = (expected: string, found: string, iteration: number) => {
+  return coloredText(
+    `Iteration ${iteration}: Expected ${coloredText(
+      formattedText(expected).underline()
+    ).success()} ${coloredText("but got").error()} ${coloredText(
+      formattedText(found).underline()
+    ).warning()}`
+  ).error();
+}
