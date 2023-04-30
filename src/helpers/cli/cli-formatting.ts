@@ -1,15 +1,14 @@
-import chalk from 'chalk';
 
 export const bgColor = (text: string) => {
     return {
         success: () => {
-            return chalk.bgGreen(text+" ");
+            return `\x1b[42m ${text} \x1b[0m`;
         },
         error: () => {
-            return chalk.bgRed(text+" ");
+            return `\x1b[41m ${text} \x1b[0m`;
         },
         warning: () => {
-            return chalk.bgYellow(text+" ");
+            return `\x1b[43m ${text} \x1b[0m`;
         },
     }
 }
@@ -17,13 +16,13 @@ export const bgColor = (text: string) => {
 export const coloredText = (text: string) => {
     return {
         success: () => {
-            return chalk.green(text);
+            return `\x1b[32m${text}\x1b[0m`;
         },
         error: () => {
-            return chalk.red(text);
+            return `\x1b[31m${text}\x1b[0m`;
         },
         warning: () => {
-            return chalk.yellow(text);
+            return `\x1b[33m${text}\x1b[0m`;
         },
     }
 }
@@ -31,13 +30,13 @@ export const coloredText = (text: string) => {
 export const formattedText = (text: string) => {
     return {
         bold: () => {
-            return chalk.bold(text);
+            return `\x1b[1m${text}\x1b[0m`;
         },
         italic: () => {
-            return chalk.italic(text);
+            return `\x1b[3m${text}\x1b[0m`;
         },
         underline: () => {
-            return chalk.underline(text);
+            return `\x1b[4m${text}\x1b[0m`;
         },
     }
 }

@@ -1,16 +1,29 @@
 {
   "name": "polaris-suite",
-  "version": "1.0.1",
-  "description": "<h1 style=\"text-align: center;\">Polaris Testing Suite</h1>",
+  "version": "0.1.1",
+  "description": "easy to use, lite weight and collaborative automated testing suite for web applications",
   "main": "index.js",
-  "types": "./types/index.d.ts",
   "type": "module",
+  "types": "build/src/index.d.ts",
+  "files": [
+    "build/src",
+    "build/bin",
+    "types"
+  ],
+  "exports": {
+    ".": {
+      "default": "./build/src/index.js",
+      "types": "./build/src/index.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./bin": "./build/bin/test.js"
+  },
   "scripts": {
-    "test": "tsc && node build/test/index.js",
+    "test": "tsc && node build/__tests__/index.js",
     "dev": "tsc && node build/src/index.js"
   },
   "bin": {
-    "polaris": "build/src/index.js"
+    "polaris": "build/bin/test.js"
   },
   "repository": {
     "type": "git",
@@ -25,10 +38,8 @@
   "homepage": "https://github.com/Major-Project-BE2018SE/polaris-suite#readme",
   "devDependencies": {
     "@types/node": "^18.11.18",
+    "@types/shelljs": "^0.8.12",
     "axios": "^1.3.4",
     "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "chalk": "^5.2.0"
   }
 }

@@ -1,2 +1,9 @@
-/build
+# npm
 /node_modules
+*.tgz
+
+# ts
+/build
+
+# dev
+/__tests__
