@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2016",                                   
+    "target": "ESNext",     
+    "module": "CommonJS",                              
     "lib": ["es6", "DOM"],                                   
     "rootDir": "./",                                    
     "moduleResolution": "node",                       
@@ -12,6 +13,6 @@
     "skipLibCheck": true,
     "declaration": true
   },
-  "include": ["types/**/*.d.ts", "src", "__tests__", "bin"],
+  "include": ["types/**/*.d.ts", "src", "__tests__", "bin", "src/global.ts"],
   "exclude": ["node_modules", "build"],
 }

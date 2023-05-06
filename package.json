@@ -3,7 +3,6 @@
   "version": "0.2.1",
   "description": "easy to use, light weight and collaborative automated testing suite for web applications",
   "main": "index.js",
-  "type": "module",
   "types": "build/src/index.d.ts",
   "files": [
     "build/src",
