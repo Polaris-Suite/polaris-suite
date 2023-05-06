@@ -39,7 +39,6 @@ class TestEnvironment {
                 }else {
                     absolutePath = require.resolve(filePath);
                 }
-                console.log("absolutePath: "+absolutePath);
 
                 if (!fs.existsSync(absolutePath)) {
                   throw new Error(`Module ${filePath} not found`);
