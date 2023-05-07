@@ -15,7 +15,7 @@ export const run = async () => {
     // reading the files in the given path
     const testFiles = fs.readdirSync(finalPath)
         .filter(file => {
-            return file.endsWith('.test.js')
+            return (file.endsWith('.test.js') || file.endsWith('.js'))
         })
         .map(file => joinPathSep(process.cwd(), ...folders, file));
     
@@ -25,15 +25,19 @@ export const run = async () => {
 const runTest = async (testFiles: string[]) => {
     testFiles.forEach(file => {
         const content = fs.readFileSync(file, 'utf-8');
+
+        const context = {
+            
+        }
         
         try {
             testEnv.runInCurrentContext(content);
-            // summary
-            testEnv.runInCurrentContext(`${result()}`);
         } catch (error) {
             console.error(error)
         }
     })
+
+    testEnv.runInCurrentContext(`${result()}`);
 }
 
 run();

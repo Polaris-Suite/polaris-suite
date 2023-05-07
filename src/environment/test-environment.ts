@@ -1,9 +1,7 @@
+import fs from "fs";
+import path from "path";
 import { createContext, runInContext } from "vm";
 import type { Context } from "vm";
-import { expect, call, component, suite } from "../index.js";
-import { result } from "../global_functions/index.js";
-import path from "path";
-import fs from "fs";
 
 export interface ContextVars {
     result: {
@@ -31,25 +29,25 @@ class TestEnvironment {
             clearInterval,
             module,
             exports,
+            fs,
+            path,
             require: (filePath: string) => {
-
                 let absolutePath = '';
+
+                // if the path starts with . then it is a relative path, so we need to join it with the current working directory
                 if(filePath.startsWith('.')) {
-                    absolutePath = path.resolve(__dirname, filePath);
+                    absolutePath = path.join(process.cwd(), ...process.argv[2].split("/"), filePath);
                 }else {
+                    // else it is an module and can be resloved by this
                     absolutePath = require.resolve(filePath);
                 }
 
+                // if the file does not exist then throw an error
                 if (!fs.existsSync(absolutePath)) {
                   throw new Error(`Module ${filePath} not found`);
                 }
                 return require(absolutePath);
             },
-            expect: expect,
-            call: call,
-            component: component,
-            suite: suite,
-            result: result,
         });
     }
 
