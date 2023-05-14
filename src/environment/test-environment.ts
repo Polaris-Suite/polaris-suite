@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import jsdom from "jsdom";
 import { createContext, runInContext } from "vm";
 import type { Context } from "vm";
 
@@ -27,6 +28,7 @@ class TestEnvironment {
             setInterval,
             clearTimeout,
             clearInterval,
+            document: new jsdom.JSDOM().window.document,
             module,
             exports,
             fs,
