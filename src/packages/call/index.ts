@@ -16,11 +16,15 @@ export const call = (fn: Function, params?: Array<any>): CallResult => {
         const isEqual = checkEqual(fn(...arg), result);
         if (options && options.async) {
           (async () => {
-            if ((isNotEqual && !isEqual) || (!isNotEqual && !isEqual))
+            if (isNotEqual && isEqual)
+              throw new CustomError(bgColor("Fail").error(), callMessage(`not to be ${result.toString()}`, fn(...arg).toString(), i + 1));
+            if(!isNotEqual && !isEqual)
               throw new CustomError(bgColor("Fail").error(), callMessage(result.toString(), fn(...arg).toString(), i + 1));
           })();
         } else {
-          if ((isNotEqual && !isEqual) || (!isNotEqual && !isEqual))
+          if (isNotEqual && isEqual)
+            throw new CustomError(bgColor("Fail").error(), callMessage(`not to be ${result.toString()}`, fn(...arg).toString(), i + 1));
+          if(!isNotEqual && !isEqual)
             throw new CustomError(bgColor("Fail").error(), callMessage(result.toString(), fn(...arg).toString(), i + 1));
         }
       }

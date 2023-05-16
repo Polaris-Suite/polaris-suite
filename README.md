@@ -58,7 +58,7 @@ test('multiply 3 * 4 equals 12', () => {
 });
 ```
 
-___Note: As of now polaris-suite only supports es6 module and not commonJS___
+___Note: As of now polaris-suite only supports commonJS module and not es6___
 
 Now, Add the script in `package.json` to run the test
 
@@ -67,11 +67,13 @@ Now, Add the script in `package.json` to run the test
     ... ,
     "scripts": {
         ... ,
-        "test": "polaris path-to-multiplication.test.js"
+        "test": "polaris test"
     },
     ...
 }
 ```
+
+> _Note: the path must be provided till the folder the test file is located and not the file name itself_
 
 Finally, run `npm test` in the terminal and the following message will be printed in the console:
 
@@ -89,31 +91,7 @@ For other functions and their property that you can use can be found in the [Doc
 
 Polaris Suite will support typescript out of the box. There will be no need for any extra configuration to get started with typescript with polaris suite.
 
-The only thing to consider will be to give the path to `.js` file instead of `.ts` in the script in `package.json`
-
-✅ `.js`
-```diff
-{
-    ... ,
-    "scripts": {
-        ... ,
-+       "test": "polaris path-to-multiplication.test.js"
-    },
-    ...
-}
-```
-
-❌ `.ts`
-```diff
-{
-    ... ,
-    "scripts": {
-        ... ,
--       "test": "polaris path-to-multiplication.test.ts"
-    },
-    ...
-}
-```
+> Note: It is not supported yet and will be added very soon
 
 <br />
 
@@ -132,7 +110,7 @@ For detailed documentation [docs](https://github.com/Major-Project-BE2018SE/pola
 [**component()**](#component) | _ele: HTML element_ | This is another basic function that is used to test component easily. It takes a HTML element.
 [**test()**](#test) | _name: string_, _fn: function_ | This is the function that will be treated as a test case in polaris-suite. It takes a name, and a function with no parameters and return value.
 [**suite()**](#suite) | _name: string_, _fn: function_ | This is the function that is used to group the test cases and create a test suite in polaris-suite. It takes a name, and a function with no parameters and return value.
-[**result()**](#result) |  | This is the function that will soon be not needed to be explicity called but as of now has to be called in order to get summary of results when using `suite`
+[**~~result()~~**](#result) |  | This is the function that will soon be not needed to be explicity called but as of now has to be called in order to get summary of results when using `suite`
 
 <br />
 
@@ -230,7 +208,9 @@ This function is used to group similar test cases together and run at once with 
 
 <br />
 
-## result
+## ~~result~~
+
+> has been called implicitly, no more need of calling explicitly
 
 Helper function that will soon be no longer needed to be explicitly executed but for now needs to be called when using suite function to get result summary.  
 
