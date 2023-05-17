@@ -6,13 +6,13 @@ import { bgColor, coloredText, formattedText } from "../helpers/cli/cli-formatti
  * @param name name of the test
  * @param fn function to be executed
  */
-export const test = (name: string, fn: Function) => {
+export const test = async (name: string, fn: Function) => {
   // incrementing the number of tests
   testEnv.getCurrentContextResult().numberOfTestCases++;
 
   // try to execute the function
   try {
-    fn();
+    await fn();
 
     console.log(`${bgColor("PASS").success()} ${coloredText(`✓ (${name})`).success()}`)
   } catch (error: any) {
