@@ -2,59 +2,33 @@ import puppeteer from 'puppeteer';
 import { CustomError } from '../../helpers/error';
 import { bgColor, coloredText } from '../../helpers/cli/cli-formatting';
 
-interface PageConfig {
+interface LaunchConfig {
     headless?: boolean;
     slowMo?: number;
 }
 
-const defaultConfig: PageConfig = {
+const defaultConfig: LaunchConfig = {
     headless: false,
     slowMo: 500,
 }
 
-export const page = async (config: PageConfig = defaultConfig) => {
+export const launch = async (config: LaunchConfig = defaultConfig) => {
     const browser = await puppeteer.launch({
-        headless: config.headless || false,
-        slowMo: config.slowMo || 500,
-    });
-
-    if(!browser) {
-        throw new CustomError("Page function", "Browser not set properly");
-    }
-
-    const page = await browser.newPage();
-
-    if(!page) {
-        throw new CustomError("Page function", "Page not set properly");
-    }
-
-    return {
-        open: async (url: string) => await page.goto(url),
-        close: async () => {
-            await page.close();
-            await browser.close();
-        },
-        click: async (selector: string) => {
-            try {
-                await page.click(selector)
-            } catch (error) {
-                // console.log(error);
-                throw new CustomError(bgColor("Page function").error(), coloredText(error!.toString()).error());
-            }
-        },
-        type: async (selector: string, text: string) => await page.type(selector, text),
-        waitForSelector: async (selector: string) => await page.waitForSelector(selector),
-    };
-}
-
-export const browser = async (config: PageConfig = defaultConfig) => {
-    const browser = await puppeteer.launch({
-        headless: config.headless || false,
-        slowMo: config.slowMo || 500,
+        headless: config.headless,
+        slowMo: config.slowMo,
     });
     
-    return {
-        _ : browser,
-        close: async () => await browser.close(),
+    return browser;
+}
+
+export const goto = async (url: string) => {
+    const [page] = await global.browser.pages();
+
+    try {
+        await page.goto(url);
+    } catch (error) {
+        throw new CustomError(bgColor("Page function").error(), coloredText(error!.toString()).error());
     }
+
+    return page;
 }

@@ -33,3 +33,25 @@ type CallResult = {
         returns: (result: any) => void;
     }
 }
+
+// Type definitions for api function return value
+type APIResult = {
+    statusCode: (status: number) => void,
+    hasResponse: (payload: object) => void,
+    throwsError: () => void,
+    not: {
+        statusCode: (status: number) => void,
+        hasResponse: (payload: object) => void,
+        throwsError: () => void,
+    }
+}
+
+type PageResult = {
+    find: (ele: HTMLElement) => HTMLElement | null,
+    click: (ele: HTMLElement) => HTMLElement | null,
+    dblClick: (ele: HTMLElement) => HTMLElement | null,
+    rightClick: (ele: HTMLElement) => HTMLElement | null,
+    scroll: (c: number, direction?: 'vertical' | 'horizontal' = 'vertical') => void,
+    hover: (x: number, y: number) => void,
+    isUrl: (url: string) => boolean
+}
