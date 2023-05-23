@@ -20,7 +20,9 @@ export const test = async (name: string, fn: Function) => {
     testEnv.getCurrentContextResult().numberOfFailedTestCases++;
 
     // catching the error and printing it
-    console.error(coloredText(`Test Failed ${formattedText(`(${name})`).bold()}`).error());  
+    console.error(coloredText(`Test Failed ${formattedText(`(${name})`).bold()}`).error());
+    console.log();
+      
     
     const stacks = error.stack.split("\n");
     stacks.splice(1, 1);
@@ -44,8 +46,7 @@ export const test = async (name: string, fn: Function) => {
  */
 export const suite = (name: string, fn: Function) => {
   // storing the previous number of failed tests
-  const numberOfTestCasesFailed = testEnv.getCurrentContextResult().numberOfFailedTestCases;
-  const numberOfFailedTestsTillNow = numberOfTestCasesFailed;
+  const numberOfFailedTestsTillNow = testEnv.getCurrentContextResult().numberOfFailedTestCases;
 
   // incrementing number of test suites
   testEnv.getCurrentContextResult().numberOfTestSuites++;
@@ -67,24 +68,20 @@ export const result = () => {
 
   console.log(
     formattedText(
-      `\nTest Suites: ${
+      `\n${globalVars.numberOfTestSuites} Suites (${
         globalVars.numberOfFailedTestSuites > 0
-          ? coloredText(`${globalVars.numberOfFailedTestSuites} failed`).error() + ","
-          : ""
-      } ${coloredText(
-        `${globalVars.numberOfTestSuites - globalVars.numberOfFailedTestSuites} passed`
-      ).success()}, ${globalVars.numberOfTestSuites} total`
+          ? `${coloredText(`${globalVars.numberOfFailedTestSuites} failed`).error()}, ${coloredText(`${globalVars.numberOfTestSuites - globalVars.numberOfFailedTestSuites} passed`).success()}`
+          : coloredText(`${globalVars.numberOfTestSuites} passed`).success()
+      })`
     ).bold()
   );
   console.log(
     formattedText(
-      `Test Cases: ${
+      `${globalVars.numberOfTestCases} Test Cases (${
         globalVars.numberOfFailedTestCases > 0
-          ? coloredText(`${globalVars.numberOfFailedTestCases} failed`).error() + ","
-          : ""
-      } ${coloredText(
-        `${globalVars.numberOfTestCases - globalVars.numberOfFailedTestCases} passed`
-      ).success()}, ${globalVars.numberOfTestCases} total`
+          ? `${coloredText(`${globalVars.numberOfFailedTestCases} failed`).error()}, ${coloredText(`${globalVars.numberOfTestCases - globalVars.numberOfFailedTestCases} passed`).success()}`
+          : coloredText(`${globalVars.numberOfTestCases} passed`).success()
+      })`
     ).bold()
   );
 };

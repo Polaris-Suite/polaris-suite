@@ -18,7 +18,7 @@
     "./bin": "./build/bin/test.js"
   },
   "scripts": {
-    "test": "tsc && node build/__tests__/index.js",
+    "test": "npx tsc && node build/bin/test.js build/__tests__ --only index.js --automation",
     "dev": "tsc && node build/src/index.js"
   },
   "bin": {
