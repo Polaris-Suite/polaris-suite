@@ -46,12 +46,14 @@ type APIResult = {
     }
 }
 
+// Type definitions for goto function return value
 type PageResult = {
-    find: (ele: HTMLElement) => HTMLElement | null,
-    click: (ele: HTMLElement) => HTMLElement | null,
-    dblClick: (ele: HTMLElement) => HTMLElement | null,
-    rightClick: (ele: HTMLElement) => HTMLElement | null,
-    scroll: (c: number, direction?: 'vertical' | 'horizontal' = 'vertical') => void,
-    hover: (x: number, y: number) => void,
+    find: (selector: string) => Promise<ElementHandle<Element>>,
+    click: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    dblClick: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    rightClick: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    type: (selector: string, text: string) => Promise<ElementHandle<HTMLElement>>,
+    scroll: (c: number, direction?: 'vertical' | 'horizontal' = 'vertical') => Promise<void>,
+    hover: (x: number, y: number) => Promise<void>,
     isUrl: (url: string) => boolean
 }
