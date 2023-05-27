@@ -33,3 +33,27 @@ type CallResult = {
         returns: (result: any) => void;
     }
 }
+
+// Type definitions for api function return value
+type APIResult = {
+    statusCode: (status: number) => void,
+    hasResponse: (payload: object) => void,
+    throwsError: () => void,
+    not: {
+        statusCode: (status: number) => void,
+        hasResponse: (payload: object) => void,
+        throwsError: () => void,
+    }
+}
+
+// Type definitions for goto function return value
+type PageResult = {
+    find: (selector: string) => Promise<ElementHandle<Element>>,
+    click: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    dblClick: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    rightClick: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    type: (selector: string, text: string) => Promise<ElementHandle<HTMLElement>>,
+    scroll: (c: number, direction?: 'vertical' | 'horizontal' = 'vertical') => Promise<void>,
+    hover: (x: number, y: number) => Promise<void>,
+    isUrl: (url: string) => boolean
+}

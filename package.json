@@ -1,6 +1,6 @@
 {
   "name": "polaris-suite",
-  "version": "0.4.1",
+  "version": "0.5.1",
   "description": "easy to use, light weight and collaborative automated testing suite for web applications",
   "main": "index.js",
   "types": "build/src/index.d.ts",
@@ -18,7 +18,7 @@
     "./bin": "./build/bin/test.js"
   },
   "scripts": {
-    "test": "tsc && node build/__tests__/index.js",
+    "test": "npx tsc && node build/bin/test.js build/__tests__ --only index.js --automation",
     "dev": "tsc && node build/src/index.js"
   },
   "bin": {
@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
-    "jsdom": "^22.0.0"
+    "jsdom": "^22.0.0",
+    "puppeteer": "^20.2.1"
   }
 }
