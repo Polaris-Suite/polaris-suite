@@ -1,3 +1,6 @@
+type dynamicObject = {
+    [key: string]: any;
+};
 
 // Type definitions for expect function return value 1.0.0
 type ExpectationResult = {
@@ -36,13 +39,13 @@ type CallResult = {
 
 // Type definitions for api function return value
 type APIResult = {
-    statusCode: (status: number) => void,
-    hasResponse: (payload: object) => void,
-    throwsError: () => void,
+    statusCode: (code: number) => void,
+    hasResponse: (payload: dynamicObject) => void,
+    throwsError: (message?: string) => void,
     not: {
-        statusCode: (status: number) => void,
-        hasResponse: (payload: object) => void,
-        throwsError: () => void,
+        statusCode: (code: number) => void,
+        hasResponse: (payload: dynamicObject) => void,
+        throwsError: (message?: string) => void,
     }
 }
 
