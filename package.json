@@ -18,7 +18,8 @@
     "./bin": "./build/bin/test.js"
   },
   "scripts": {
-    "test": "npx tsc && node build/bin/test.js build/__tests__ --only index.js --automation",
+    "test:unit": "npx tsc && node build/bin/test.js build/__tests__ --only index.js",
+    "test:e2e": "npx tsc && node build/bin/test.js build/__tests__ --only index.js --automation",
     "dev": "tsc && node build/src/index.js"
   },
   "bin": {
