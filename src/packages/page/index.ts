@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { CustomError } from '../../helpers/error';
+import { CustomError, expectMessage } from '../../helpers/error';
 import { bgColor, coloredText } from '../../helpers/cli/cli-formatting';
 
 interface LaunchConfig {
@@ -71,7 +71,11 @@ export const goto = async (url: string): Promise<PageResult> => {
             }
         },
         isUrl: (url: string) => {
-            return page.url().includes(url);
+            const isUrlCorrect = page.url() === url;
+
+            if (!isUrlCorrect) {
+                throw new CustomError(bgColor("Page function").error(), expectMessage(page.url(), url));
+            }
         },
         dblClick: async (selector: string) => {
             try {
