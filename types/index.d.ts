@@ -1,3 +1,6 @@
+type dynamicObject = {
+    [key: string]: any;
+};
 
 // Type definitions for expect function return value 1.0.0
 type ExpectationResult = {
@@ -32,4 +35,28 @@ type CallResult = {
     not: {
         returns: (result: any) => void;
     }
+}
+
+// Type definitions for api function return value
+type APIResult = {
+    statusCode: (code: number) => void,
+    hasResponse: (payload: dynamicObject) => void,
+    throwsError: (message?: string) => void,
+    not: {
+        statusCode: (code: number) => void,
+        hasResponse: (payload: dynamicObject) => void,
+        throwsError: (message?: string) => void,
+    }
+}
+
+// Type definitions for goto function return value
+type PageResult = {
+    find: (selector: string) => Promise<ElementHandle<Element>>,
+    click: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    dblClick: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    rightClick: (selector: string) => Promise<ElementHandle<HTMLElement>>,
+    type: (selector: string, text: string) => Promise<ElementHandle<HTMLElement>>,
+    scroll: (c: number, direction?: 'vertical' | 'horizontal' = 'vertical') => Promise<void>,
+    hover: (x: number, y: number) => Promise<void>,
+    isUrl: (url: string) => void,
 }
