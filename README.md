@@ -2,7 +2,7 @@
 
 Polaris suite is a easy to use, light and collaborative web tesiting package for javascript and typescript projects.
 
-Visit [polaris-suite.io](https://github.com/Major-Project-BE2018SE/polaris-suite-web) for detailed information.
+Visit [polaris-suite docs](https://major-project-be2018se.github.io/polaris-suite-web/#/) for detailed information.
 
 ## Table of Contents
 
@@ -97,7 +97,7 @@ Polaris Suite will support typescript out of the box. There will be no need for 
 
 ## Documentation
 
-For detailed documentation [docs](https://github.com/Major-Project-BE2018SE/polaris-suite-web)
+For detailed documentation [docs](https://major-project-be2018se.github.io/polaris-suite-web/#/)
 
 <br/>
 
@@ -227,7 +227,7 @@ Helper function that will soon be no longer needed to be explicitly executed but
 
 It is a bare minimum guide to some custom types in polaris-suite to better understand its functions and functionality.
 
-To dive deeper, head to [docs - types](https://github.com/Major-Project-BE2018SE/polaris-suite-web)
+To dive deeper, head to [docs - types](https://major-project-be2018se.github.io/polaris-suite-web/#/typescript?id=types)
 
 ## DataTable
 
