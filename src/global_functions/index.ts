@@ -7,22 +7,26 @@ import { bgColor, coloredText, formattedText } from "../helpers/cli/cli-formatti
  * @param fn function to be executed
  */
 export const test = async (name: string, fn: Function) => {
+  const env = testEnv.getCurrentContextResult();
+
   // incrementing the number of tests
-  testEnv.getCurrentContextResult().numberOfTestCases++;
+  env.numberOfTestCases++;
 
   // try to execute the function
   try {
     await fn();
 
     console.log(`${bgColor("PASS").success()} ${coloredText(`✓ (${name})`).success()}`)
+    env.numberOfPassedTestCases++;
+    env.testSuites[env.numberOfTestSuites - 1].push(1);
   } catch (error: any) {
     // incrementing the number of failed test
-    testEnv.getCurrentContextResult().numberOfFailedTestCases++;
+    env.testSuites[env.numberOfTestSuites - 1].push(0);
+    env.numberOfFailedTestCases++;
 
     // catching the error and printing it
     console.error(coloredText(`Test Failed ${formattedText(`(${name})`).bold()}`).error());
     console.log();
-      
     
     const stacks = error.stack.split("\n");
     stacks.splice(1, 1);
@@ -45,20 +49,36 @@ export const test = async (name: string, fn: Function) => {
  * @param fn function that contains the test functions
  */
 export const suite = (name: string, fn: Function) => {
-  // storing the previous number of failed tests
-  const numberOfFailedTestsTillNow = testEnv.getCurrentContextResult().numberOfFailedTestCases;
-
   // incrementing number of test suites
   testEnv.getCurrentContextResult().numberOfTestSuites++;
+  testEnv.getCurrentContextResult().testSuites.push([]);
 
-  // executing the function
   fn();
-
-  // incrementing number of failed test suites if the number of previous failed test is less than new number of failed test
-  if (numberOfFailedTestsTillNow < testEnv.getCurrentContextResult().numberOfFailedTestCases) {
-    testEnv.getCurrentContextResult().numberOfFailedTestSuites++;
-  }
 };
+
+/**
+ * 
+ * check for total failed and passed suites
+ * @param testSuites 
+ * @returns 
+ */
+const calculateSuiteResult = (testSuites: number[][]) => {
+  let result = {
+    totalSuites: testSuites.length,
+    totalFailedSuites: 0,
+    totalPassedSuites: 0,
+  };
+
+  testSuites.forEach((suite) => {
+    if (suite.includes(0)) {
+      result.totalFailedSuites++;
+    } else {
+      result.totalPassedSuites++;
+    }
+  });
+
+  return result;
+}
 
 /**
  * logs the result summary after running the tests
@@ -66,12 +86,14 @@ export const suite = (name: string, fn: Function) => {
 export const result = () => {
   const globalVars = testEnv.getCurrentContextResult();
 
+  const suiteResult = calculateSuiteResult(globalVars.testSuites);
+
   console.log(
     formattedText(
-      `\n${globalVars.numberOfTestSuites} Suites (${
-        globalVars.numberOfFailedTestSuites > 0
-          ? `${coloredText(`${globalVars.numberOfFailedTestSuites} failed`).error()}, ${coloredText(`${globalVars.numberOfTestSuites - globalVars.numberOfFailedTestSuites} passed`).success()}`
-          : coloredText(`${globalVars.numberOfTestSuites} passed`).success()
+      `\n${suiteResult.totalSuites} Suites (${
+        suiteResult.totalFailedSuites > 0
+          ? `${coloredText(`${suiteResult.totalFailedSuites} failed`).error()}, ${coloredText(`${suiteResult.totalPassedSuites} passed`).success()}`
+          : coloredText(`${suiteResult.totalPassedSuites} passed`).success()
       })`
     ).bold()
   );
@@ -79,7 +101,7 @@ export const result = () => {
     formattedText(
       `${globalVars.numberOfTestCases} Test Cases (${
         globalVars.numberOfFailedTestCases > 0
-          ? `${coloredText(`${globalVars.numberOfFailedTestCases} failed`).error()}, ${coloredText(`${globalVars.numberOfTestCases - globalVars.numberOfFailedTestCases} passed`).success()}`
+          ? `${coloredText(`${globalVars.numberOfFailedTestCases} failed`).error()}, ${coloredText(`${globalVars.numberOfPassedTestCases} passed`).success()}`
           : coloredText(`${globalVars.numberOfTestCases} passed`).success()
       })`
     ).bold()
