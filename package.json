@@ -20,14 +20,15 @@
   "scripts": {
     "test:unit": "npx tsc && node build/bin/test.js build/__tests__ --only index.js",
     "test:e2e": "npx tsc && node build/bin/test.js build/__tests__ --only index.js --automation",
-    "dev": "tsc && node build/src/index.js"
+    "dev": "tsc && node build/src/index.js",
+    "build": "tsc"
   },
   "bin": {
     "polaris": "build/bin/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Major-Project-BE2018SE/polaris-suite.git"
+    "url": "git+https://github.com/polars-suite/polaris-suite.git"
   },
   "keywords": [
     "testing",
@@ -41,9 +42,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Major-Project-BE2018SE/polaris-suite/issues"
+    "url": "https://github.com/polaris-suite/polaris-suite/issues"
   },
-  "homepage": "https://github.com/Major-Project-BE2018SE/polaris-suite#readme",
+  "homepage": "https://github.com/polaris-suite/polaris-suite#readme",
   "devDependencies": {
     "@types/jsdom": "^21.1.1",
     "@types/node": "^18.11.18",
