@@ -8,11 +8,8 @@ import { bgColor, coloredText, formattedText } from "../helpers/cli/cli-formatti
  */
 export const test = async (name: string, fn: Function) => {
   const env = testEnv.getCurrentContextResult();
-
-  // incrementing the number of tests
   env.numberOfTestCases++;
 
-  // try to execute the function
   try {
     await fn();
 
@@ -49,7 +46,6 @@ export const test = async (name: string, fn: Function) => {
  * @param fn function that contains the test functions
  */
 export const suite = (name: string, fn: Function) => {
-  // incrementing number of test suites
   testEnv.getCurrentContextResult().numberOfTestSuites++;
   testEnv.getCurrentContextResult().testSuites.push([]);
 

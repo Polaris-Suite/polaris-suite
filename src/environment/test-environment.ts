@@ -43,7 +43,7 @@ class TestEnvironment {
         if(filePath.startsWith('.')) {
           absolutePath = path.join(process.cwd(), ...process.argv[2].split("/"), filePath);
         }else {
-          // else it is an module and can be resloved by this
+          // else it is an module and can be resloved by require
           absolutePath = require.resolve(filePath);
         }
 
