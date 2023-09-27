@@ -9,7 +9,7 @@ import { CustomError, expectMessage } from "../../helpers/error/index.js";
  */
 export const expect = (actual: any): ExpectationResult => {
   let expectation = {
-    equalsTo: (expected: any) => {
+    toBe: (expected: any) => {
       if (!checkEqual(actual, expected)) {
         throw new CustomError(
           bgColor("Fail").error(),
@@ -22,6 +22,14 @@ export const expect = (actual: any): ExpectationResult => {
         throw new CustomError(
           bgColor("Fail").error(),
           `${expectMessage("null", typeof actual)}`
+        );
+      }
+    },
+    toBeUndefined: () => {
+      if(actual !== undefined) {
+        throw new CustomError(
+          bgColor("Fail").error(),
+          `${expectMessage("undefined", typeof actual)}`
         );
       }
     },
@@ -68,7 +76,7 @@ export const expect = (actual: any): ExpectationResult => {
       }
     },
     not: {
-      equalsTo: (expected: any) => {
+      toBe: (expected: any) => {
         if (checkEqual(actual, expected)) {
           throw new CustomError(
             bgColor("Fail").error(),
@@ -81,6 +89,14 @@ export const expect = (actual: any): ExpectationResult => {
           throw new CustomError(
             bgColor("Fail").error(),
             `${expectMessage("not be null", typeof actual)}`
+          );
+        }
+      },
+      toBeUndefined: () => {
+        if (actual === undefined) {
+          throw new CustomError(
+            bgColor("Fail").error(),
+            `${expectMessage("not be undefined", typeof actual)}`
           );
         }
       },
